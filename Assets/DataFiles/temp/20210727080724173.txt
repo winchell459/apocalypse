@@ -1,0 +1,12 @@
+
+        
+        #const max_width = 20.
+        #const max_depth = 20.
+        #const max_height = 10.
+        width(1..max_width).
+        depth(1..max_depth).
+        height(1..max_height).
+        block_types(grass;water;sand).
+
+        1{block(XX,YY,ZZ):height(YY), block_types(Type)}1 :- width(XX), depth(ZZ).
+     
