@@ -9,7 +9,9 @@ public class block : MonoBehaviour
         none,
         grass,
         water,
-        sand
+        sand,
+        food,
+        resource
     }
     public BlockTypes BlockType;
 
