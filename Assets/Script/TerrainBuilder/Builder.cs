@@ -9,7 +9,7 @@ namespace TerrainBuilder
     public class Builder : MonoBehaviour
     {
         public ClingoSolver Solver;
-        public GameObject BlockPrefab, GrassPrefab, SandPrefab, WaterPrefab, FoodPrefab;
+        public GameObject BlockPrefab, GrassPrefab, SandPrefab, WaterPrefab, FoodPrefab, ResourcePrefab;
 
         public int width = 10, depth = 10, height = 10, worldWidth = 2, worldDepth = 2;
         private GameObject[,] blocks;
@@ -26,7 +26,7 @@ namespace TerrainBuilder
             width(min_width..max_width).
             depth(min_depth..max_depth).
             height(min_height..max_height).
-            block_types(grass;water;sand).
+            block_types(grass;water;sand;food;resource).
 
             three(-1;0;1).
             two(-1;1).
@@ -34,6 +34,7 @@ namespace TerrainBuilder
             :- block(XX,YY,ZZ,_), block(XX+Offset, Y2, ZZ,_), YY > Y2 + 1, two(Offset).
             :- block(XX,YY,ZZ,_), block(XX, Y2, ZZ+Offset,_), YY > Y2 + 1, two(Offset).
 
+            :- {block(_,_,_,food)}!= 1.
             %water must be adjacent to at least 2 water blocks
             :- block(XX,_,ZZ, water), Count = {
                                         block(XX-1,_,ZZ,water);
@@ -41,7 +42,31 @@ namespace TerrainBuilder
                                         block(XX,_,ZZ-1,water);
                                         block(XX,_,ZZ+1,water)
                                         }, Count < 2,
-                                        XX > min_width, XX <= max_width, ZZ > min_depth, ZZ <= max_depth.
+                                        XX > min_width-1, XX <= max_width, ZZ > min_depth-1, ZZ <= max_depth.
+
+            %food is surrounded by only resources
+            :- block(XX,_,ZZ,food), Count = {
+                                        block(XX-1,_,ZZ,resource);
+                                        block(XX+1,_,ZZ,resource);
+                                        block(XX,_,ZZ-1,resource);
+                                        block(XX,_,ZZ+1,resource)
+                                        }, Count < 4,
+                                        XX > min_width-1, XX <= max_width, ZZ > min_depth-1, ZZ <= max_depth.
+
+
+            %resource block neighbouring food, random shape
+            :-block(XX,YY,ZZ,resource), Count = {
+                                        block(XX+1,Y2,ZZ,food);
+                                        block(XX-1,Y2,ZZ,food);
+                                        block(XX,Y2,ZZ-1,food);
+                                        block(XX,Y2,ZZ+1,food);
+                                        block(XX-1,Y2,ZZ+1,food);
+                                        block(XX+1,Y2,ZZ+1,food);
+                                        block(XX-1,Y2,ZZ-1,food);
+                                        block(XX+1,Y2,ZZ-1,food)
+                                        }, Count!=1,
+                                        XX > min_width-1, XX <= max_width, ZZ > min_depth-1, ZZ <= max_depth.
+
 
             %water must be same height as adjecent water
             :- block(XX,YY,ZZ,water), block(XX-1, Y2, ZZ,water), YY != Y2.
@@ -168,6 +193,32 @@ namespace TerrainBuilder
             return code;
         }
 
+        void FoodCount(int maxWidth, int minWidth, int maxDepth, int minDepth)
+        {
+            for (int i = minWidth - 1; i <= maxWidth + 1; i += 1)
+            {
+                if (blocks[i, minDepth - 1].GetComponent<block>().BlockType == block.BlockTypes.food)
+                {
+                    return;
+                }
+                if (blocks[i, maxDepth + 1].GetComponent<block>().BlockType == block.BlockTypes.food)
+                {
+                    return;
+                }
+            }
+            for (int j = minDepth - 1; j <= maxDepth + 1; j += 1)
+            {
+                if (blocks[minWidth - 1, j].GetComponent<block>().BlockType == block.BlockTypes.food)
+                {
+                    return;
+                }
+                if (blocks[maxWidth + 1, j].GetComponent<block>().BlockType == block.BlockTypes.food)
+                {
+                    return;
+                }
+            }
+        }
+
         public bool solved = true;
 
         int currentID;
@@ -186,11 +237,13 @@ namespace TerrainBuilder
                     if (type == "grass") BlockPrefab = GrassPrefab;
                     else if (type == "water") BlockPrefab = WaterPrefab;
                     else if (type == "sand") BlockPrefab = SandPrefab;
+                    else if (type == "food") BlockPrefab = FoodPrefab;
+                    else if (type == "resource") BlockPrefab = ResourcePrefab;
 
                     GameObject blockObj = Instantiate(BlockPrefab);
                     float xScale = blockObj.transform.localScale.x;
                     float zScale = blockObj.transform.localScale.z;
-                    blockObj.transform.position = new Vector3(x * 2, y / 8, z * 2);
+                    blockObj.transform.position = new Vector3(x * xScale, y / 8, z * zScale);
                     //removed a block if it has already been place in that location
                     if (blocks[(int)x, (int)z])
                         Destroy(blocks[(int)x, (int)z]);

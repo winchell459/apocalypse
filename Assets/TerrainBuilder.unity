@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &821726694
 MonoBehaviour:
@@ -172,6 +172,7 @@ MonoBehaviour:
   SandPrefab: {fileID: 1937625557293259434, guid: cb66816560ce1214182c8c704a71a985, type: 3}
   WaterPrefab: {fileID: 2695439725971377014, guid: c330fbc0d4da8d84383b6b56a9ad0f9d, type: 3}
   FoodPrefab: {fileID: 285014758105615524, guid: 689862e7d5c53d140885596e315b5ef0, type: 3}
+  ResourcePrefab: {fileID: 1351343233699901053, guid: 4544fd6fbc4fbe149b8ed7ed30c8a5c3, type: 3}
   width: 10
   depth: 10
   height: 10
@@ -208,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4243523052385139476, guid: 966846d471b1243b686278851e4dfb17, type: 3}
       propertyPath: FindMultipleSolutions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4243523052385139477, guid: 966846d471b1243b686278851e4dfb17, type: 3}
       propertyPath: m_Name
@@ -244,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4243523052385139479, guid: 966846d471b1243b686278851e4dfb17, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4243523052385139479, guid: 966846d471b1243b686278851e4dfb17, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -412,7 +413,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1961138181
 GameObject:
