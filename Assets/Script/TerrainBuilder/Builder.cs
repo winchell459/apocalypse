@@ -34,7 +34,7 @@ namespace TerrainBuilder
             :- block(XX,YY,ZZ,_), block(XX+Offset, Y2, ZZ,_), YY > Y2 + 1, two(Offset).
             :- block(XX,YY,ZZ,_), block(XX, Y2, ZZ+Offset,_), YY > Y2 + 1, two(Offset).
 
-            :- {block(_,_,_,food)}!= 1.
+            
             %water must be adjacent to at least 2 water blocks
             :- block(XX,_,ZZ, water), Count = {
                                         block(XX-1,_,ZZ,water);
@@ -78,7 +78,8 @@ namespace TerrainBuilder
             :- block(XX,YY,ZZ,water), block(XX+Offset, Y2, ZZ, Type), Type != water, not YY < Y2, two(Offset).
             :- block(XX,YY,ZZ,water), block(XX, Y2, ZZ+Offset, Type), Type != water, not YY < Y2, two(Offset).
 
-            :- Count = {block(_,_,_,Type)}, block_types(Type), Count == 0.
+            non_food_types(water;sand;grass).
+            :- Count = {block(_,_,_,Type)}, non_food_types(Type), Count == 0.
 
             %:- not block(_,min_height,_,_).
             %:- not block(_,max_height,_,_).
@@ -129,13 +130,49 @@ namespace TerrainBuilder
             for (int i = 1; i <= worldWidth * worldDepth; i += 1)
             {
                 buildQueue.Add(i);
+
+                
+            }
+            for (int i = 0; i < buildQueue.Count; i++)
+            {
+                int temp = buildQueue[i];
+                int randomIndex = Random.Range(i, buildQueue.Count);
+                buildQueue[i] = buildQueue[randomIndex];
+                buildQueue[randomIndex] = temp;
             }
         }
 
         void BuildArea(int maxWidth, int minWidth, int maxHeight, int minHeight, int maxDepth, int minDepth)
         {
             string boarderCode = GetBoarder(maxWidth, minWidth, maxDepth, minDepth);
+            Debug.Log(GetFoodCode(new Vector2(maxDepth, maxWidth), new Vector2(minDepth, minWidth)));
+            string foodCode = GetFoodCode(new Vector2(maxDepth, maxWidth), new Vector2(minDepth, minWidth));
             ClingoSolve(aspCode + boarderCode, $" -c max_width={maxWidth} -c max_height={maxHeight} -c max_depth={maxDepth} -c min_width={minWidth} -c min_height={minHeight} -c min_depth={minDepth} ");
+        }
+
+        string GetFoodCode(Vector2 max, Vector2 min)
+        {
+            float minDistance = 30;
+            List<GameObject> foodblocks = FoodCount();
+            Vector2 minMax = new Vector2(min.x, max.y);
+            Vector2 maxMin = new Vector2(max.x, min.y);
+            bool outOfRange = true;
+            foreach (GameObject blocks in foodblocks)
+            {
+                if (Vector2.Distance(max, blocks.transform.position) < minDistance) outOfRange = false;
+                if (Vector2.Distance(min, blocks.transform.position) < minDistance) outOfRange = false;
+                if (Vector2.Distance(maxMin, blocks.transform.position) < minDistance) outOfRange = false;
+                if (Vector2.Distance(minMax, blocks.transform.position) < minDistance) outOfRange = false;
+            }
+            if (outOfRange)
+            {
+                return ":- {block(_,_,_,food)}!= 1.\n";
+            }
+            else
+            {
+                return ":- {block(_,_,_,food)} > 0.";
+            }
+            
         }
 
         void RemoveArea(int id)
@@ -193,30 +230,22 @@ namespace TerrainBuilder
             return code;
         }
 
-        void FoodCount(int maxWidth, int minWidth, int maxDepth, int minDepth)
+        List<GameObject> FoodCount()
         {
-            for (int i = minWidth - 1; i <= maxWidth + 1; i += 1)
+            List<GameObject> blockList = new List<GameObject>();
+
+            for (int i = 0; i <= blocks.GetUpperBound(0); i += 1)
             {
-                if (blocks[i, minDepth - 1].GetComponent<block>().BlockType == block.BlockTypes.food)
+                for (int j = 0; j <= blocks.GetUpperBound(1); j += 1)
                 {
-                    return;
-                }
-                if (blocks[i, maxDepth + 1].GetComponent<block>().BlockType == block.BlockTypes.food)
-                {
-                    return;
+                    if (blocks[i, j] && blocks[i, j].GetComponent<block>().BlockType == block.BlockTypes.food)
+                    {
+                        blockList.Add(blocks[i, j]);
+                    }
                 }
             }
-            for (int j = minDepth - 1; j <= maxDepth + 1; j += 1)
-            {
-                if (blocks[minWidth - 1, j].GetComponent<block>().BlockType == block.BlockTypes.food)
-                {
-                    return;
-                }
-                if (blocks[maxWidth + 1, j].GetComponent<block>().BlockType == block.BlockTypes.food)
-                {
-                    return;
-                }
-            }
+           
+            return blockList;
         }
 
         public bool solved = true;
