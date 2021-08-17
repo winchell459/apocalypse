@@ -176,8 +176,8 @@ MonoBehaviour:
   width: 10
   depth: 10
   height: 10
-  worldWidth: 8
-  worldDepth: 8
+  worldWidth: 6
+  worldDepth: 6
   buildQueue: 
   solvedAreas: 
   solved: 1
@@ -192,6 +192,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a099bab5c874424087a23890eae1a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1074250615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074250617}
+  - component: {fileID: 1074250616}
+  m_Layer: 0
+  m_Name: apocalypse Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1074250616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074250615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df3acbd5b8084d4d9f8744eb698ccae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 8526469753270903371, guid: 736adcdc1a1a7fc438d1c6caa8c5e857, type: 3}
+  playerStartPos: {x: 0, y: 0, z: 0}
+  MainCamera: {fileID: 1961138185}
+--- !u!4 &1074250617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074250615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1409457940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,7 +416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1894210539
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -426,6 +472,7 @@ GameObject:
   - component: {fileID: 1961138184}
   - component: {fileID: 1961138183}
   - component: {fileID: 1961138182}
+  - component: {fileID: 1961138185}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -498,3 +545,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1961138185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961138181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829c6bdeb42425d4c82384ad6d75f181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Offset: {x: 0, y: -5, z: 10}

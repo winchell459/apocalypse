@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float Speed = 10;
     private Rigidbody rb;
