@@ -34,6 +34,9 @@ namespace TerrainBuilder
             :- block(XX,YY,ZZ,_), block(XX+Offset, Y2, ZZ,_), YY > Y2 + 1, two(Offset).
             :- block(XX,YY,ZZ,_), block(XX, Y2, ZZ+Offset,_), YY > Y2 + 1, two(Offset).
 
+            :- block(XX,YY,ZZ,_), block(XX+O1, Y2, ZZ+O2,_), YY > Y2 + 2, two(O1), two(O2).
+            
+
             
             %water must be adjacent to at least 2 water blocks
             :- block(XX,_,ZZ, water), Count = {
@@ -99,7 +102,7 @@ namespace TerrainBuilder
                                         block(XX+Depth,_,ZZ,water): sand_depth(Depth);
                                         block(XX,_,ZZ-Depth,water): sand_depth(Depth);
                                         block(XX,_,ZZ+Depth,water): sand_depth(Depth)} < 1,
-                                        XX > min_depth, XX <= max_width, ZZ > min_depth, ZZ <= max_depth.
+                                        XX > min_depth-1, XX <= max_width, ZZ > min_depth-1, ZZ <= max_depth.
 
             %neghboring waters must not be grass
             :- block(XX,Y1,ZZ,water), block(XX-1,Y2,ZZ,grass).
