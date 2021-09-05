@@ -20,8 +20,10 @@ public class Player : MonoBehaviour
     {
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
-        //rb.AddForce(Speed * new Vector3(horizontal,0,vertical));
-        rb.velocity=(Speed * new Vector3(horizontal,0,vertical) + new Vector3(0,rb.velocity.y,0));
-        rb.velocity = Speed * horizontal * CameraRig.right + Speed * vertical*CameraRig.forward + new Vector3(0, rb.velocity.y, 0);
+        Vector3 MoveHorizontally = Speed * horizontal * CameraRig.right;
+        Vector3 MoveForward = Speed * vertical * CameraRig.forward;
+        Vector3 MoveVertically = new Vector3(0, rb.velocity.y, 0);
+        rb.velocity = MoveHorizontally + MoveForward + MoveVertically;
+
     }
 }

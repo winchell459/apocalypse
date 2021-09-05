@@ -8,12 +8,16 @@ public class apocalypseHandler : MonoBehaviour
     private Player player;
     public Vector3 playerStartPos;
     public camera MainCamera;
+    public PoisonArea SaveArea;
+    public float SaveRadius = 20;
 
     public void TerrainBuilt(Vector3 mapCenter)
     {
         playerStartPos = mapCenter;
         player = Instantiate(PlayerPrefab, playerStartPos + Vector3.up, Quaternion.identity).GetComponent<Player>();
         MainCamera.Setup(player.transform);
+        SaveArea = Instantiate(SaveArea, mapCenter, Quaternion.identity);
+        SaveArea.Setup(mapCenter, SaveRadius);
     }
     public void StartGame()
     {
