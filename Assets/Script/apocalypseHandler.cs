@@ -15,6 +15,7 @@ public class apocalypseHandler : MonoBehaviour
     {
         playerStartPos = mapCenter;
         player = Instantiate(PlayerPrefab, playerStartPos + Vector3.up, Quaternion.identity).GetComponent<Player>();
+        player.CameraRig = MainCamera.transform;
         MainCamera.Setup(player.transform);
         SaveArea = Instantiate(SaveArea, mapCenter, Quaternion.identity);
         SaveArea.Setup(mapCenter, SaveRadius);
