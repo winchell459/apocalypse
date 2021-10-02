@@ -11,6 +11,9 @@ public class apocalypseHandler : MonoBehaviour
     public PoisonArea SaveArea;
     public float SaveRadius = 20;
 
+    public bool buildWorld = true;
+    public Vector3 mapCenter = new Vector3(0, 10, 0);
+
     public void TerrainBuilt(Vector3 mapCenter)
     {
         playerStartPos = mapCenter;
@@ -20,9 +23,13 @@ public class apocalypseHandler : MonoBehaviour
         SaveArea = Instantiate(SaveArea, mapCenter, Quaternion.identity);
         SaveArea.Setup(mapCenter, SaveRadius);
     }
-    public void StartGame()
-    {
 
+    public void Start()
+    {
+        if (!buildWorld)
+        {
+            TerrainBuilt(mapCenter);
+        }
     }
 
     // Update is called once per frame
