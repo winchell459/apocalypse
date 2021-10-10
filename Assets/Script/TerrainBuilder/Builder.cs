@@ -9,10 +9,11 @@ namespace TerrainBuilder
     public class Builder : MonoBehaviour
     {
         public ClingoSolver Solver;
-        public GameObject BlockPrefab, GrassPrefab, SandPrefab, WaterPrefab, FoodPrefab, ResourcePrefab;
+        public GameObject BlockPrefab, GrassPrefab, SandPrefab, WaterPrefab, FoodPrefab, ResourcePrefab, TreePrefab;
 
         public int width = 10, depth = 10, height = 10, worldWidth = 2, worldDepth = 2;
         private GameObject[,] blocks;
+        bool gameStart = false;
 
         string aspCode = @"
             
@@ -26,13 +27,15 @@ namespace TerrainBuilder
             width(min_width..max_width).
             depth(min_depth..max_depth).
             height(min_height..max_height).
-            block_types(grass;water;sand;food;resource).
+            block_types(grass;water;sand;food;resource;tree).
 
             three(-1;0;1).
             two(-1;1).
             1{block(XX,YY,ZZ,Type): height(YY), block_types(Type)}1 :- width(XX), depth(ZZ).
             :- block(XX,YY,ZZ,_), block(XX+Offset, Y2, ZZ,_), YY > Y2 + 1, two(Offset).
             :- block(XX,YY,ZZ,_), block(XX, Y2, ZZ+Offset,_), YY > Y2 + 1, two(Offset).
+
+            :- block(XX,YY,ZZ,_), block(XX+O1,Y2,ZZ+O2,_),YY>Y2+2, two(O1),two(O2).
 
             
             %water must be adjacent to at least 2 water blocks
@@ -53,6 +56,13 @@ namespace TerrainBuilder
                                         }, Count < 4,
                                         XX > min_width-1, XX <= max_width, ZZ > min_depth-1, ZZ <= max_depth.
 
+            :- block(XX,_,ZZ,tree),not block(XX-1,_,ZZ,grass).
+            :- block(XX,_,ZZ,tree),not block(XX+1,_,ZZ,grass).
+            :- block(XX,_,ZZ,tree),not block(XX,_,ZZ-1,grass).
+            :- block(XX,_,ZZ,tree),not block(XX,_,ZZ+1,grass).
+                                        
+                                      
+                                        
 
             %resource block neighbouring food, random shape
             :-block(XX,YY,ZZ,resource), Count = {
@@ -130,49 +140,51 @@ namespace TerrainBuilder
             for (int i = 1; i <= worldWidth * worldDepth; i += 1)
             {
                 buildQueue.Add(i);
-
-                
             }
-            for (int i = 0; i < buildQueue.Count; i++)
+
+            //shuffle buildQueue to produce more random food placement
+            for (int i = 0; i < buildQueue.Count; i += 1)
             {
+                int index = Random.Range(0, buildQueue.Count);
                 int temp = buildQueue[i];
-                int randomIndex = Random.Range(i, buildQueue.Count);
-                buildQueue[i] = buildQueue[randomIndex];
-                buildQueue[randomIndex] = temp;
+                buildQueue[i] = buildQueue[index];
+                buildQueue[index] = temp;
             }
         }
 
         void BuildArea(int maxWidth, int minWidth, int maxHeight, int minHeight, int maxDepth, int minDepth)
         {
             string boarderCode = GetBoarder(maxWidth, minWidth, maxDepth, minDepth);
-            Debug.Log(GetFoodCode(new Vector2(maxDepth, maxWidth), new Vector2(minDepth, minWidth)));
-            string foodCode = GetFoodCode(new Vector2(maxDepth, maxWidth), new Vector2(minDepth, minWidth));
-            ClingoSolve(aspCode + boarderCode, $" -c max_width={maxWidth} -c max_height={maxHeight} -c max_depth={maxDepth} -c min_width={minWidth} -c min_height={minHeight} -c min_depth={minDepth} ");
+            Debug.Log(GetFoodCode(new Vector3(maxWidth, 0, maxDepth), new Vector3(minWidth, 0, minDepth)));
+            string foodCode = GetFoodCode(new Vector3(maxWidth, 0, maxDepth), new Vector3(minWidth, 0, minDepth));
+            ClingoSolve(aspCode + boarderCode + foodCode, $" -c max_width={maxWidth} -c max_height={maxHeight} -c max_depth={maxDepth} -c min_width={minWidth} -c min_height={minHeight} -c min_depth={minDepth} ");
         }
-
-        string GetFoodCode(Vector2 max, Vector2 min)
+        string GetFoodCode(Vector3 max, Vector3 min)
         {
             float minDistance = 30;
-            List<GameObject> foodblocks = FoodCount();
-            Vector2 minMax = new Vector2(min.x, max.y);
-            Vector2 maxMin = new Vector2(max.x, min.y);
+            List<GameObject> foodBlocks = FoodCount();
+            Vector3 minMax = new Vector3(min.x, 0, max.z);
+            Vector3 maxMin = new Vector3(max.x, 0, min.z);
             bool outOfRange = true;
-            foreach (GameObject blocks in foodblocks)
+            Debug.Log("FoodCount: " + foodBlocks.Count);
+
+            foreach (GameObject blocks in foodBlocks)
             {
-                if (Vector2.Distance(max, blocks.transform.position) < minDistance) outOfRange = false;
-                if (Vector2.Distance(min, blocks.transform.position) < minDistance) outOfRange = false;
-                if (Vector2.Distance(maxMin, blocks.transform.position) < minDistance) outOfRange = false;
-                if (Vector2.Distance(minMax, blocks.transform.position) < minDistance) outOfRange = false;
+                Debug.Log(blocks.transform.position);
+                if (Vector3.Distance(max, blocks.transform.position) < minDistance) outOfRange = false;
+                if (Vector3.Distance(min, blocks.transform.position) < minDistance) outOfRange = false;
+                if (Vector3.Distance(maxMin, blocks.transform.position) < minDistance) outOfRange = false;
+                if (Vector3.Distance(minMax, blocks.transform.position) < minDistance) outOfRange = false;
             }
             if (outOfRange)
             {
-                return ":- {block(_,_,_,food)}!= 1.\n";
+                return "\n:- {block(_,_,_,food)}!= 1.\n";
             }
             else
             {
-                return ":- {block(_,_,_,food)} > 0.";
+                return "\n:- {block(_,_,_,food)} > 0.\n";
             }
-            
+
         }
 
         void RemoveArea(int id)
@@ -233,7 +245,7 @@ namespace TerrainBuilder
         List<GameObject> FoodCount()
         {
             List<GameObject> blockList = new List<GameObject>();
-
+            //Debug.Log(blocks.GetUpperBound(0) + " " + blocks.GetUpperBound(1));
             for (int i = 0; i <= blocks.GetUpperBound(0); i += 1)
             {
                 for (int j = 0; j <= blocks.GetUpperBound(1); j += 1)
@@ -244,7 +256,6 @@ namespace TerrainBuilder
                     }
                 }
             }
-           
             return blockList;
         }
 
@@ -268,6 +279,7 @@ namespace TerrainBuilder
                     else if (type == "sand") BlockPrefab = SandPrefab;
                     else if (type == "food") BlockPrefab = FoodPrefab;
                     else if (type == "resource") BlockPrefab = ResourcePrefab;
+                    else if (type == "tree") BlockPrefab = TreePrefab;
 
                     GameObject blockObj = Instantiate(BlockPrefab);
                     float xScale = blockObj.transform.localScale.x;
@@ -304,7 +316,18 @@ namespace TerrainBuilder
                 BuildArea(maxWidth, minWidth, height, 1, maxDepth, minDepth);
                 solved = false;
             }
+            else if (solved && !gameStart)
+            {
+                int i = blocks.GetUpperBound(0) / 2;
+                int j = blocks.GetUpperBound(1) / 2;
+                GameObject centerBlock = blocks[i, j];
+                Debug.Log(i + " " + j);
+                Debug.Log(centerBlock.transform.position);
+                FindObjectOfType<Apocalypsehandler>().TerrainBuilt(centerBlock.transform.position);
+                gameStart = true;
+            }
         }
+        
         private int GetRandomNeighbor(int id)
         {
             Vector2 pos = GetCoordinate(id, worldWidth);

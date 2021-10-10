@@ -11,7 +11,8 @@ public class block : MonoBehaviour
         water,
         sand,
         food,
-        resource
+        resource,
+        tree
     }
     public BlockTypes BlockType;
 

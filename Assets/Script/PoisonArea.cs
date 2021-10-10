@@ -31,5 +31,11 @@ public class PoisonArea : MonoBehaviour
     private void Update()
     {
         GetComponent<SphereCollider>().radius -= shrinkRate * Time.deltaTime;
+        GetComponent<SphereCollider>().radius = Mathf.Clamp(GetComponent<SphereCollider>().radius, 0, float.MaxValue);
+    }
+    public void Setup(Vector3 pos, float radius)
+    {
+        transform.position = pos;
+        GetComponent<SphereCollider>().radius = radius;
     }
 }
