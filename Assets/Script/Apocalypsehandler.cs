@@ -6,6 +6,8 @@ public class Apocalypsehandler : MonoBehaviour
 {
     public GameObject PlayerPrefab;
     private Player player;
+    [SerializeField] private Animal animal;
+    [SerializeField] private GameObject animalPrefab;
     private Vector3 playerStartPos;
     public camera MainCamera;
     public PoisonArea SafeArea;
@@ -18,6 +20,8 @@ public class Apocalypsehandler : MonoBehaviour
     {
         playerStartPos = mapCenter;
         player = Instantiate(PlayerPrefab, playerStartPos + Vector3.up, Quaternion.identity).GetComponent<Player>();
+        if (animal == null) animal = Instantiate(animalPrefab).GetComponent<Animal>();
+        animal.Target = player.transform;
         player.CameraRig = MainCamera.transform;
         MainCamera.Setup(player.transform);
         SafeArea = Instantiate(SafeArea, mapCenter, Quaternion.identity);

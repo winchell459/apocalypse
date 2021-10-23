@@ -31,13 +31,17 @@ public class ResourceArea : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerStay(Collider other)
     {
-        if (Time.fixedTime > stepTimeStart + stepTime)
+        if (other.CompareTag("Player"))
         {
-            float addAmount = Mathf.Clamp(stepAmount, 0,CurrentResource);
-            CurrentResource = addAmount;
-            FindObjectOfType<health>().AddHealth(addAmount);
+            if (Time.fixedTime > stepTimeStart + stepTime)
+            {
+                float addAmount = Mathf.Clamp(stepAmount, 0, CurrentResource);
+                CurrentResource = addAmount;
+                FindObjectOfType<health>().AddHealth(addAmount);
 
-            stepTimeStart = Time.fixedTime;
+                stepTimeStart = Time.fixedTime;
+            }
+            FindObjectOfType<Animal>().Eating = true;
         }
     }
 
@@ -46,6 +50,7 @@ public class ResourceArea : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             PlayerEating = false;
+            FindObjectOfType<Animal>().Eating = false;
         }
     }
 
