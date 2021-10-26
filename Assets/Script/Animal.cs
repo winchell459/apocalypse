@@ -21,6 +21,8 @@ public class Animal : MonoBehaviour
         if (Target)
         {
             transform.position = Target.position - Offset;
+            Vector3 targetVel = Target.GetComponent<Rigidbody>().velocity;
+            if (targetVel.magnitude > 0.1f) transform.right = new Vector3(targetVel.x, 0, targetVel.z);
         }
         anim.SetBool("Eating", Eating);
     }
