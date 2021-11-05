@@ -123,30 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &23238681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3993188030926497096, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
-  m_PrefabInstance: {fileID: 1065586932}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &23238685
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23238681}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 43b57a83a6d1e3a40ac6c018d9a7d112, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &431165066
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.90358365, b: 0.90358365, a: 1}
+  m_Color: {r: 0.14400113, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -192,7 +168,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -214,16 +190,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431165066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1463964808}
-  m_RootOrder: 1
+  m_Father: {fileID: 839518164}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 385, y: 188}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0.000015258789}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &491422524 stripped
@@ -301,6 +277,82 @@ MonoBehaviour:
   buildQueue: 
   solvedAreas: 
   solved: 1
+--- !u!1 &839518163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839518164}
+  - component: {fileID: 839518166}
+  - component: {fileID: 839518165}
+  m_Layer: 5
+  m_Name: TimerPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &839518164
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839518163}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 431165069}
+  m_Father: {fileID: 1463964808}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -3.8900146, y: -3.2999878}
+  m_SizeDelta: {x: 150, y: 30}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &839518165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839518163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &839518166
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839518163}
+  m_CullTransparentMesh: 0
 --- !u!114 &887734776 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 168108682026712159, guid: 9f18095c2b77bfb4da2606f88e7fc678, type: 3}
@@ -394,6 +446,30 @@ PrefabInstance:
     - target: {fileID: 1907105276, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
       propertyPath: poisonRate
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907105276, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+      propertyPath: normalColor.r
+      value: 0.016197944
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907105276, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+      propertyPath: normalColor.g
+      value: 0.49056602
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907105276, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+      propertyPath: normalColor.b
+      value: 0.016197944
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226653369443533505, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226653369443533505, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5451862
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226653369443533505, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.27450982
       objectReference: {fileID: 0}
     - target: {fileID: 6153982990848038553, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -730,6 +806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timertext: {fileID: 431165067}
+  startTime: 0
+  time: 0
 --- !u!1 &2125476723
 GameObject:
   m_ObjectHideFlags: 0

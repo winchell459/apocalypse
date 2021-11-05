@@ -11,11 +11,14 @@ public class health : MonoBehaviour
     [SerializeField] private int xmin = 0, xmax = 100;
     private float currentValue = 100;
     public bool isPoisoned = false;
+    public bool isEating = false;
     float maxLength;
     float minLength = 0;
 
     [SerializeField] private Text healthText;
     [SerializeField] private RectTransform healthBar;
+
+    [SerializeField] private Color poisonColor = Color.red, eatingColor = new Color(0,1,0.25f), normalColor = Color.green;
 
     // Use this for initialization
     void Start()
@@ -39,8 +42,19 @@ public class health : MonoBehaviour
             currentValue = Mathf.Clamp(currentValue - rate * Time.deltaTime, xmin, xmax);
 
             healthText.text = ((int)currentValue).ToString();
-            Text text = Color("Red");
-            healthText = text;
+            //Text text = Color("Red");
+            //healthText = text;
+            if (isEating)
+            {
+                healthBar.gameObject.GetComponent<Image>().color = eatingColor;
+            }else if (!isPoisoned)
+            {
+                healthBar.gameObject.GetComponent<Image>().color = poisonColor;
+            }
+            else
+            {
+                healthBar.gameObject.GetComponent<Image>().color = normalColor;
+            }
 
             float percent = currentValue / xmax;
             float currentLength = maxLength * percent;
@@ -55,11 +69,7 @@ public class health : MonoBehaviour
         
     }
 
-    private Text Color(string v)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public void Poison(bool isPoisoned)
     {
         this.isPoisoned = isPoisoned;

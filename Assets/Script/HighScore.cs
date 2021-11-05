@@ -6,13 +6,10 @@ using UnityEngine.UI;
 public class HighScore : MonoBehaviour
 {
     public Text Score;
-    private int scorenum;
-    void updateScore()
+    
+    public static void UpdateScore(int scorenum)
     {
-        GameObject Deer = GameObject.Find("Deer");
-        GetComponent<Timer>().timertext = Score;
-        GetComponent<Timer>().time = scorenum;
-
+        
         if (scorenum > PlayerPrefs.GetInt("HighScore",0))
         {
             PlayerPrefs.SetInt("HighScore",scorenum);
@@ -21,8 +18,10 @@ public class HighScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("HighScore is on " + gameObject.name);
 
+        int scorenum = PlayerPrefs.GetInt("HighScore",0);
+        Score.text = Timer.FormatTime(scorenum);
     }
 
     // Update is called once per frame

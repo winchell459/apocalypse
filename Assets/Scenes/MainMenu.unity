@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 336609689}
   - component: {fileID: 336609687}
   m_Layer: 5
-  m_Name: Button
+  m_Name: HighScorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -646,8 +646,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: {fileID: 977631176}
-  Scorenumber: 0
-  time: 0
 --- !u!114 &336609689
 MonoBehaviour:
   m_ObjectHideFlags: 0

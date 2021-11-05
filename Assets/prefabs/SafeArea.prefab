@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647382b3c5c05e34db059e701f78633f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poisonRate: 1
+  poisonRate: 0.1
   startRadius: 0
   shrinkRate: 0.05
   cloud: {fileID: 1503625978650390181}
