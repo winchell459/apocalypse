@@ -336,6 +336,14 @@ namespace TerrainBuilder
             if (pos.x > 1 && solvedAreas.Contains(GetID(new Vector2(pos.x - 1, pos.y), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x - 1, pos.y), worldWidth));
             if (pos.y < worldDepth && solvedAreas.Contains(GetID(new Vector2(pos.x, pos.y + 1), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x, pos.y + 1), worldWidth));
             if (pos.y > 1 && solvedAreas.Contains(GetID(new Vector2(pos.x, pos.y - 1), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x, pos.y - 1), worldWidth));
+            
+            if (neighbors.Count==0)
+            {
+                if (pos.x < worldWidth && pos.y > 1 && solvedAreas.Contains(GetID(new Vector2(pos.x + 1, pos.y - 1), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x + 1, pos.y), worldWidth));
+                if (pos.x > 1 && pos.y > 1 && solvedAreas.Contains(GetID(new Vector2(pos.x - 1, pos.y - 1), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x - 1, pos.y), worldWidth));
+                if (pos.y < worldDepth && pos.x > 1 && solvedAreas.Contains(GetID(new Vector2(pos.x + 1, pos.y + 1), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x, pos.y + 1), worldWidth));
+                if (pos.y > 1 && pos.x < 1 && solvedAreas.Contains(GetID(new Vector2(pos.x - 1, pos.y - 1), worldWidth))) neighbors.Add(GetID(new Vector2(pos.x, pos.y - 1), worldWidth));
+            }
             int index = Random.Range(0, neighbors.Count);
             return neighbors[index];
         }

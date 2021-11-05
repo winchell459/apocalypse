@@ -177,8 +177,8 @@ MonoBehaviour:
   width: 10
   depth: 10
   height: 10
-  worldWidth: 1
-  worldDepth: 1
+  worldWidth: 20
+  worldDepth: 20
   buildQueue: 
   solvedAreas: 
   solved: 1

@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEditor;
 using UnityEngine.UI;
+using System;
+
 public class health : MonoBehaviour
 {
     private bool cooling, hpstart = true;
@@ -9,14 +11,18 @@ public class health : MonoBehaviour
     [SerializeField] private int xmin = 0, xmax = 100;
     private float currentValue = 100;
     public bool isPoisoned = false;
+    float maxLength;
+    float minLength = 0;
 
-    Text healthText;
+    [SerializeField] private Text healthText;
+    [SerializeField] private RectTransform healthBar;
 
     // Use this for initialization
     void Start()
     {
 
         healthText = GameObject.FindGameObjectWithTag("health").GetComponent<Text>();//获取组件方法
+        maxLength = healthBar.sizeDelta.x;
 
         //currentValue = int.Parse(healthText.text);
     }
@@ -32,7 +38,13 @@ public class health : MonoBehaviour
 
             currentValue = Mathf.Clamp(currentValue - rate * Time.deltaTime, xmin, xmax);
 
-            healthText.text = "Health: " + currentValue;
+            healthText.text = ((int)currentValue).ToString();
+            Text text = Color("Red");
+            healthText = text;
+
+            float percent = currentValue / xmax;
+            float currentLength = maxLength * percent;
+            healthBar.sizeDelta = new Vector2(currentLength, healthBar.sizeDelta.y);
         }
     }
 
@@ -40,6 +52,12 @@ public class health : MonoBehaviour
     {
         isPoisoned = true;
         poisonRate = rate;
+        
+    }
+
+    private Text Color(string v)
+    {
+        throw new NotImplementedException();
     }
 
     public void Poison(bool isPoisoned)
