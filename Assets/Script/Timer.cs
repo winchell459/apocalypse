@@ -18,12 +18,19 @@ public class Timer : MonoBehaviour
     void Update()
     {
         float t = Time.time - startTime;
+        timertext.text = FormatTime(t);
+        time = (int)t;
+        HighScore.UpdateScore(time);
+    }
+    public static string FormatTime(float t)
+    {
+       
         string minutes = ((int)t / 60).ToString();
         string seconds = (t % 60).ToString("f0");
         int time = (int)((t / 60) + (t % 60));
-        timertext.text = minutes + ":" + seconds;
+        if (t % 60 < 10) seconds = "0" + seconds;
+        return minutes + ":" + seconds;
 
-        PlayerPrefs.SetFloat("HighScore",time);
+       
     }
-    
 }

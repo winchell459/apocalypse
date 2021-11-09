@@ -8,6 +8,7 @@ public class Animal : MonoBehaviour
     public Vector3 Offset = new Vector3(0, -5, 10);
     private Animator anim;
     public bool Eating;
+    public bool Death;
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +26,6 @@ public class Animal : MonoBehaviour
             if (targetVel.magnitude > 0.1f) transform.right = new Vector3(targetVel.x, 0, targetVel.z);
         }
         anim.SetBool("Eating", Eating);
+        anim.SetBool("Death", Death);
     }
 }

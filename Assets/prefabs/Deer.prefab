@@ -679,7 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
-  CameraRig: {fileID: 0}
+  CameraRig: {fileID: 471706813531561280, guid: 07b9dc38cbffa474d982dd86ceb687c8, type: 3}
 --- !u!114 &168108682026712159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,8 +692,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cac453b5848d54d99e00b98482642f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 168108682026712144}
   Offset: {x: 0.25, y: -0.7, z: 0}
+  Eating: 0
+  Death: 0
 --- !u!95 &168108682026712157
 Animator:
   serializedVersion: 3

@@ -36,12 +36,13 @@ public class ResourceArea : MonoBehaviour
             if (Time.fixedTime > stepTimeStart + stepTime)
             {
                 float addAmount = Mathf.Clamp(stepAmount, 0, CurrentResource);
-                CurrentResource = addAmount;
+                CurrentResource -= addAmount;
                 FindObjectOfType<health>().AddHealth(addAmount);
 
                 stepTimeStart = Time.fixedTime;
             }
             FindObjectOfType<Animal>().Eating = true;
+            FindObjectOfType<health>().isEating = true;
         }
     }
 
@@ -51,6 +52,7 @@ public class ResourceArea : MonoBehaviour
         {
             PlayerEating = false;
             FindObjectOfType<Animal>().Eating = false;
+            FindObjectOfType<health>().isEating = false;
         }
     }
 
