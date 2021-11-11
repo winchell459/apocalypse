@@ -26,6 +26,7 @@ public class Animal : MonoBehaviour
             if (targetVel.magnitude > 0.1f) transform.right = new Vector3(targetVel.x, 0, targetVel.z);
         }
         anim.SetBool("Eating", Eating);
+        
         anim.SetBool("Death", Death);
     }
 }

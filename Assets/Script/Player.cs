@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
 
     public Transform CameraRig;
+    public bool isDead;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +19,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
-        //rb.AddForce(Speed * new Vector3(horizontal,0,vertical));
-        Vector3 MoveHorizontally = Speed * horizontal * CameraRig.right;
-        Vector3 Moveforward = Speed * vertical * CameraRig.forward;
-        rb.velocity=MoveHorizontally + Moveforward + new Vector3(0,rb.velocity.y,0);
+        if (!isDead)
+        {
+            float vertical = Input.GetAxis("Vertical");
+            float horizontal = Input.GetAxis("Horizontal");
+            //rb.AddForce(Speed * new Vector3(horizontal,0,vertical));
+            Vector3 MoveHorizontally = Speed * horizontal * CameraRig.right;
+            Vector3 Moveforward = Speed * vertical * CameraRig.forward;
+            rb.velocity = MoveHorizontally + Moveforward + new Vector3(0, rb.velocity.y, 0);
+        }
+        else
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
     }
 }

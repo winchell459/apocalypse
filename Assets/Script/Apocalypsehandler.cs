@@ -15,6 +15,8 @@ public class Apocalypsehandler : MonoBehaviour
 
     public bool BuildWorld = true;
     public Vector3 mapCenter = new Vector3(20,5,20);
+    private bool gameover = false;
+    public GameObject DeathScreen;
 
     public void TerrainBuilt(Vector3 mapCenter)
     {
@@ -30,6 +32,7 @@ public class Apocalypsehandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DeathScreen.SetActive(false);
         if (!BuildWorld)
         {
             TerrainBuilt(mapCenter);
@@ -39,6 +42,17 @@ public class Apocalypsehandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!gameover && player.isDead)
+        {
+            gameover = true;
+            DeathScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
+    public void GameOverButton()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Warning Sheet");
+        
+    }
+    
 }

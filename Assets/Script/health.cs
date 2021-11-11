@@ -63,6 +63,8 @@ public class health : MonoBehaviour
             float percent = currentValue / xmax;
             float currentLength = maxLength * percent;
             healthBar.sizeDelta = new Vector2(currentLength, healthBar.sizeDelta.y);
+
+            Death();
         }
     }
 
@@ -88,10 +90,10 @@ public class health : MonoBehaviour
     }
     void Death()
     {
-        if (currentValue == 0f)
+        if (currentValue <= 0f)
         {
-            death = gameObject.GetComponent<Animation>();
-            death.Play("Deer Death");
+            FindObjectOfType<Animal>().Death = true;
+            FindObjectOfType<Player>().isDead = true;
         }
     }
 }
