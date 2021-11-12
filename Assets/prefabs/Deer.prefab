@@ -185,15 +185,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168108681611516131}
-  m_LocalRotation: {x: -0.0010821368, y: -0.0013963481, z: -0.000001511042, w: 0.99999845}
-  m_LocalPosition: {x: 0.80999947, y: 0.30999994, z: -0.07999992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.748, y: 0.294, z: 0.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 168108682670330034}
   - {fileID: 168108682842057200}
   m_Father: {fileID: 168108682026712144}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -0.124, y: -0.16, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &168108681740909002
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,10 +639,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168108682026712144}
-  - component: {fileID: 168108682026712145}
   - component: {fileID: 168108682026712159}
   - component: {fileID: 168108682026712157}
   - component: {fileID: 168108682026712158}
+  - component: {fileID: 2092696795}
   m_Layer: 0
   m_Name: Deer
   m_TagString: Player
@@ -657,7 +657,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168108682026712146}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 31.62, y: 1, z: 31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -666,20 +666,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &168108682026712145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168108682026712146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba38fc8576929e540ae1535a76fe14c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 10
-  CameraRig: {fileID: 471706813531561280, guid: 07b9dc38cbffa474d982dd86ceb687c8, type: 3}
 --- !u!114 &168108682026712159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cac453b5848d54d99e00b98482642f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 168108682026712144}
+  Target: {fileID: 0}
   Offset: {x: 0.25, y: -0.7, z: 0}
   Eating: 0
   Death: 0
@@ -731,6 +717,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2092696795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168108682026712146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f3eeb635984ba4290561a75d531e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timertext: {fileID: 0}
+  startTime: 0
+  time: 0
 --- !u!1 &168108682079825846
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168108682158830095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.60900116}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 168108682578578313}
@@ -1371,7 +1372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168108682670330035}
   m_LocalRotation: {x: 0.00123915, y: -0, z: -2.2737368e-13, w: 0.9999993}
-  m_LocalPosition: {x: 0.23022206, y: 0.23982769, z: 0.079876535}
+  m_LocalPosition: {x: 0.2302221, y: 0.23982769, z: 0.079876535}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 168108682206017000}
@@ -1516,7 +1517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168108682842057201}
   m_LocalRotation: {x: -0.0008778844, y: -0.0010943596, z: 0.7071051, w: 0.7071071}
-  m_LocalPosition: {x: 0.11022359, y: 0.16982721, z: 0.080060154}
+  m_LocalPosition: {x: 0.1102236, y: 0.16982721, z: 0.080060154}
   m_LocalScale: {x: 0.60000086, y: 0.40000027, z: 0.40000004}
   m_Children: []
   m_Father: {fileID: 168108681611516130}

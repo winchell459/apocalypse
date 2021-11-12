@@ -21,7 +21,7 @@ public class Animal : MonoBehaviour
     {
         if (Target)
         {
-            transform.position = Target.position - Offset;
+            transform.position = Target.position - Offset.x * transform.forward - Offset.z * transform.right - Offset.y * transform.up;
             Vector3 targetVel = Target.GetComponent<Rigidbody>().velocity;
             if (targetVel.magnitude > 0.1f) transform.right = new Vector3(targetVel.x, 0, targetVel.z);
         }

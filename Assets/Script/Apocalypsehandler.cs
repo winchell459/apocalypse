@@ -17,6 +17,7 @@ public class Apocalypsehandler : MonoBehaviour
     public Vector3 mapCenter = new Vector3(20,5,20);
     private bool gameover = false;
     public GameObject DeathScreen;
+    public GameObject[] BorderBlocks;
 
     public void TerrainBuilt(Vector3 mapCenter)
     {
@@ -54,5 +55,32 @@ public class Apocalypsehandler : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Warning Sheet");
         
     }
-    
+    public void BuildBorder()
+    {
+        for (int layer = 1; layer <= 3; layer += 1)
+        {
+            float y = (-1 + (float)layer) / 2;
+
+            for (int x = 1 - layer; x <= SafeRadius * 2 + layer; x += 1)
+            {
+                int zTop = (int)SafeRadius * 2 + layer;
+                int zBottom = 1 - layer;
+                BuildRandomBorderBlock(x, y, zBottom);
+                BuildRandomBorderBlock(x, y, zTop);
+            }
+            for (int z = 1 - layer + 1; z <= SafeRadius * 2 + layer - 1; z += 1)
+            {
+                int xRight = (int)SafeRadius * 2 + layer;
+                int xLeft = 1 - layer;
+                BuildRandomBorderBlock(xRight, y, z);
+                BuildRandomBorderBlock(xLeft, y, z);
+            }
+        }
+       
+    }
+    private void BuildRandomBorderBlock(int x, float y, int z)
+    {
+        int blockIndex = Random.Range(0, BorderBlocks.Length);
+        Instantiate(BorderBlocks[blockIndex], new Vector3(x, y, z), Quaternion.identity);
+    }
 }

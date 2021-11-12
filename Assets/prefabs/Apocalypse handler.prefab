@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 41792836777113270, guid: e9458af43baa6b540b38369da6ba7674, type: 3}
-  animal: {fileID: 0}
-  animalPrefab: {fileID: 0}
-  MainCamera: {fileID: 0}
+  animal: {fileID: 168108682026712159, guid: 9f18095c2b77bfb4da2606f88e7fc678, type: 3}
+  animalPrefab: {fileID: 168108682026712146, guid: 9f18095c2b77bfb4da2606f88e7fc678, type: 3}
+  MainCamera: {fileID: 471706813531561283, guid: 07b9dc38cbffa474d982dd86ceb687c8, type: 3}
   SafeArea: {fileID: 817098808991597362, guid: 789f952b504f3444e94c74b5af17568f, type: 3}
   SafeRadius: 20
   BuildWorld: 0
   mapCenter: {x: 20, y: 5, z: 20}
+  DeathScreen: {fileID: 0}
+  BorderBlocks: []
