@@ -7,7 +7,7 @@ using System;
 
 public class health : MonoBehaviour
 {
-    private bool cooling, hpstart = true;
+    [SerializeField]private bool cooling, hpstart = false;
     [SerializeField] private float normalRate = 0.1f, poisonRate = 0.2f;
     [SerializeField] private int xmin = 0, xmax = 100;
     private float currentValue = 100;
@@ -95,6 +95,10 @@ public class health : MonoBehaviour
             FindObjectOfType<Animal>().Death = true;
             FindObjectOfType<Player>().isDead = true;
         }
+    }
+    public void SetHPStart(bool hpstart)
+    {
+        this.hpstart = hpstart;
     }
 }
 

@@ -646,8 +646,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: {fileID: 977631176}
-  Scorenumber: 0
-  time: 0
 --- !u!114 &336609689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,6 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170db29400ab22e4aba5578c5c8fe209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1938351820}
 --- !u!4 &487996359
 Transform:
   m_ObjectHideFlags: 0

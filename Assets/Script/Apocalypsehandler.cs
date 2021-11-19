@@ -8,6 +8,7 @@ public class Apocalypsehandler : MonoBehaviour
     private Player player;
     [SerializeField] private Animal animal;
     [SerializeField] private GameObject animalPrefab;
+    [SerializeField] private AudioSource audioSource;
     private Vector3 playerStartPos;
     public camera MainCamera;
     public PoisonArea SafeArea;
@@ -29,10 +30,16 @@ public class Apocalypsehandler : MonoBehaviour
         MainCamera.Setup(player.transform);
         SafeArea = Instantiate(SafeArea, mapCenter, Quaternion.identity);
         SafeArea.Setup(mapCenter, SafeRadius);
+        BuildBorder();
+        FindObjectOfType<health>().SetHPStart(true);
+
+        BuildWorld = false;
     }
     // Start is called before the first frame update
     void Start()
     {
+        audioSource.volume = ((float)SettingsHandler.GetMasterVolume()) / 100;
+
         DeathScreen.SetActive(false);
         if (!BuildWorld)
         {
@@ -43,7 +50,7 @@ public class Apocalypsehandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameover && player.isDead)
+        if (!BuildWorld && !gameover && player.isDead)
         {
             gameover = true;
             DeathScreen.SetActive(true);

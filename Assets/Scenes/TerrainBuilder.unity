@@ -294,6 +294,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+--- !u!1 &1065586933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 60939599, guid: 59cb5d3c922aa504eaae6504b1cb063c, type: 3}
+  m_PrefabInstance: {fileID: 1065586932}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1409457940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -579,6 +584,10 @@ PrefabInstance:
       propertyPath: BuildWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 852270827672380681, guid: 659a38e07e4a78a48ad7755e63ea154f, type: 3}
+      propertyPath: DeathScreen
+      value: 
+      objectReference: {fileID: 1065586933}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 659a38e07e4a78a48ad7755e63ea154f, type: 3}
 --- !u!114 &1859677969 stripped
