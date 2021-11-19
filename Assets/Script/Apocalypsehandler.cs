@@ -19,6 +19,8 @@ public class Apocalypsehandler : MonoBehaviour
     public GameObject DeathScreen;
     public GameObject[] BorderBlocks;
 
+    [SerializeField] private AudioSource audioSource;
+
     public void TerrainBuilt(Vector3 mapCenter)
     {
         playerStartPos = mapCenter;
@@ -29,10 +31,16 @@ public class Apocalypsehandler : MonoBehaviour
         MainCamera.Setup(player.transform);
         SafeArea = Instantiate(SafeArea, mapCenter, Quaternion.identity);
         SafeArea.Setup(mapCenter, SafeRadius);
+        BuildBorder();
+        FindObjectOfType<health>().SetHPstart(true);
+
+        BuildWorld = false;
     }
     // Start is called before the first frame update
     void Start()
     {
+        audioSource.volume = ((float)SettingsHandler.GetMasterVolume()) / 100;
+
         DeathScreen.SetActive(false);
         if (!BuildWorld)
         {
@@ -43,7 +51,7 @@ public class Apocalypsehandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameover && player.isDead)
+        if (!BuildWorld && !gameover && player.isDead)
         {
             gameover = true;
             DeathScreen.SetActive(true);
