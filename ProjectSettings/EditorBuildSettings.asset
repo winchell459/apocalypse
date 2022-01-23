@@ -6,24 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Menus/MainMenu.unity
     guid: 51ee8b0f41262bf4598b3fb1a38f9ddc
   - enabled: 1
-    path: Assets/Scenes/HelpAdvice.unity
-    guid: 99b5715a72f6e854ea0e8a22f22bf443
-  - enabled: 1
-    path: Assets/Scenes/Map 1.unity
-    guid: 2b6916c0b711afd438fb765130fd9bea
-  - enabled: 1
-    path: Assets/Scenes/Settings.unity
+    path: Assets/Scenes/Menus/Settings.unity
     guid: 622e60bec574be148921c8bc13c4f4fe
   - enabled: 1
-    path: Assets/Scenes/level.unity
+    path: Assets/Scenes/Menus/HelpAdvice.unity
+    guid: 99b5715a72f6e854ea0e8a22f22bf443
+  - enabled: 1
+    path: Assets/Scenes/Menus/level.unity
     guid: 5399b14faa26f7841960c9ed47481486
   - enabled: 1
-    path: Assets/Scenes/Warning Sheet.unity
+    path: Assets/Scenes/Maps/Map 1.unity
+    guid: 2b6916c0b711afd438fb765130fd9bea
+  - enabled: 1
+    path: Assets/Scenes/Maps/Map 50 x 50.unity
+    guid: 1a882c7fda49d4e45a54b171776fa336
+  - enabled: 1
+    path: Assets/Scenes/Maps/Map 100 x 100.unity
+    guid: c23d5eb6cdaa93b4ab8a5c83b085f22f
+  - enabled: 1
+    path: Assets/Scenes/Menus/Warning Sheet.unity
     guid: 53f7cb5b4c13b5946906715d46c8b266
   - enabled: 1
-    path: Assets/Scenes/Warning Sheet2.unity
+    path: Assets/Scenes/Menus/Warning Sheet2.unity
     guid: 31b992c804082ca488fa98d56b482dcb
   m_configObjects: {}

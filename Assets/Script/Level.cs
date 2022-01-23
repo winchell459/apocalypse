@@ -27,10 +27,10 @@ public class Level : MonoBehaviour
     }
     void LoadLevel2()
     {
-        SceneManager.LoadScene("map 2");
+        SceneManager.LoadScene("map 50 x 50");
     }
     void LoadLevel3()
     {
-        SceneManager.LoadScene("map 3");
+        SceneManager.LoadScene("map 100 x 100");
     }
 }

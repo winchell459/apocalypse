@@ -14,6 +14,7 @@ namespace TerrainBuilder
         public int width = 10, depth = 10, height = 10, worldWidth = 2, worldDepth = 2;
         private GameObject[,] blocks;
         bool gameStart = false;
+        [SerializeField] private Transform map;
 
         string aspCode = @"
             
@@ -281,7 +282,7 @@ namespace TerrainBuilder
                     else if (type == "resource") BlockPrefab = ResourcePrefab;
                     else if (type == "tree") BlockPrefab = TreePrefab;
 
-                    GameObject blockObj = Instantiate(BlockPrefab);
+                    GameObject blockObj = Instantiate(BlockPrefab,map);
                     float xScale = blockObj.transform.localScale.x;
                     float zScale = blockObj.transform.localScale.z;
                     blockObj.transform.position = new Vector3(x * xScale, y / 8, z * zScale);

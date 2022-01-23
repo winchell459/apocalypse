@@ -40,7 +40,15 @@ public class camera : MonoBehaviour
             transform.eulerAngles += new Vector3(0, dx * RotateScale, 0);
 
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
     public void Setup(Transform target)
     {
